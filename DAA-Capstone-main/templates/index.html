@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Courier Operations</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">C</span>
+      <div><strong>Courier</strong><small>Operations</small></div>
+    </div>
+    <nav>
+      <button class="nav-item active" data-section="overview">Overview</button>
+      <button class="nav-item" data-section="parcels">Parcels</button>
+      <button class="nav-item" data-section="route">Route</button>
+      <button class="nav-item" data-section="benchmarks">Benchmarks</button>
+    </nav>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow">Dispatch control</p>
+        <h1 id="page-title">Operations overview</h1>
+      </div>
+      <div class="capacity-control">
+        <label for="capacity">Trip capacity</label>
+        <div class="capacity-input">
+          <input id="capacity" type="number" min="1" max="100" value="15">
+          <span>kg</span>
+          <button id="plan-button" type="button">Generate plan</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="overview-section" class="section active-section">
+      <div class="metric-grid">
+        <article class="metric-card accent-green">
+          <span>Selected parcels</span>
+          <strong id="selected-count">—</strong>
+          <small id="selected-weight">Waiting for plan</small>
+        </article>
+        <article class="metric-card accent-blue">
+          <span>Total value</span>
+          <strong id="total-value">—</strong>
+          <small>Combined parcel value</small>
+        </article>
+        <article class="metric-card accent-orange">
+          <span>Route distance</span>
+          <strong id="route-distance">—</strong>
+          <small>Depot to depot</small>
+        </article>
+        <article class="metric-card accent-purple">
+          <span>Capacity used</span>
+          <strong id="capacity-used">—</strong>
+          <small id="remaining-capacity">—</small>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <article class="panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">Priority queue</p><h2>Prioritized parcels</h2></div>
+          </div>
+          <div id="priority-list" class="parcel-list"></div>
+        </article>
+        <article class="panel route-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">Today's route</p><h2>Delivery sequence</h2></div>
+            <span id="stop-count" class="badge">0 stops</span>
+          </div>
+          <div id="route-steps" class="route-steps"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="parcels-section" class="section">
+      <article class="panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Knapsack selection</p><h2>Parcel manifest</h2></div>
+          <span id="manifest-count" class="badge">0 parcels</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Parcel</th><th>Destination</th><th>Weight</th><th>Value</th><th>Priority</th><th>Deadline</th><th>Status</th></tr></thead>
+            <tbody id="parcel-table"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section id="route-section" class="section">
+      <article class="panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Shortest-path tour</p><h2>Route map</h2></div>
+          <span id="route-distance-badge" class="badge">— km</span>
+        </div>
+        <div class="route-map" id="route-map">
+          <div id="route-node-map"></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="benchmarks-section" class="section">
+      <article class="panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Runtime evidence</p><h2>Algorithm benchmarks</h2></div>
+        </div>
+        <div id="benchmark-list" class="benchmark-list"></div>
+      </article>
+    </section>
+  </main>
+
+  <div id="loading" class="loading hidden">Generating plan…</div>
+  <div id="toast" class="toast hidden"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
